@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Alert, Button } from 'react-native';
+import { Text, View, TouchableOpacity, Alert, Button, StyleSheet } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
 
 
@@ -11,13 +11,23 @@ export default class JoinGroupButton extends React.Component {
   render() {
 
       return (
-        <Button
-        onPress={this.props.joinGroup}
-        title="Join Group"
-        color="#841584"
-        />
+        <TouchableOpacity
+          onPress={this.props.joinGroup}
+          style={styles.button}
+        >
+          <Text>Join Group</Text>
+        </TouchableOpacity>
         
       )
     }
 
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#c12cc1',
+    padding: 10,
+    margin: 10
+  }
+})

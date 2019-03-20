@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Alert, Button } from 'react-native';
+import { Text, View, TouchableOpacity, Alert, Button, StyleSheet } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
 
 
@@ -11,13 +11,23 @@ export default class CreateGroupButton extends React.Component {
   render() {
 
       return (
-        <Button
+        <TouchableOpacity
         onPress={this.props.createGroup}
-        title="Create Group"
-        color="#841584"
-        />
+        style={styles.button}
+        >
+          <Text>Create a Group</Text>
+        </TouchableOpacity>
         
       )
     }
 
 }
+
+const styles = StyleSheet.create({
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#c12cc1',
+    padding: 10,
+    margin: 10
+  }
+})
