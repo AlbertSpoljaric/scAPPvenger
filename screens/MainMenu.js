@@ -1,18 +1,34 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Alert, Text } from 'react-native';
 import BackButton from '../components/BackButton';
 import CreateGroupButton from '../components/CreateGroupButton';
 import JoinGroupButton from '../components/JoinGroupButton';
 
 
-export default class Game extends React.Component {
+
+export default class MainMenu extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.socket = props.navigation.state.params.socket;
+
+        this.socket.on('uservalidation', function (data) {
+            if (data.error) {
+                Alert.alert(data.error)
+            } else if (data.username) {
+                Alert.alert(data.username)
+            }
+        })
+        
+    }
+
     static navigationOptions = {
         header: null
     }
     state={}
 
     goBack=()=>{
-        this.props.navigation.navigate('StartMenu')
+        this.props.navigation.goBack();
     }
 
     joinGroup=()=>{
@@ -23,6 +39,13 @@ export default class Game extends React.Component {
         this.props.navigation.navigate('Create')
     }
 
+    testSocket=()=>{
+        console.log(this.socket.io.engine.id)
+        var data = {
+            username: "testitesti"
+        }
+        this.socket.emit('validateuser', data);
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -31,6 +54,7 @@ export default class Game extends React.Component {
                     <JoinGroupButton joinGroup ={this.joinGroup}/>
                     <CreateGroupButton createGroup = {this.createGroup}/>
                 </View>
+                <TouchableOpacity onPress={this.testSocket}><Text>TEST</Text></TouchableOpacity>
             </View>
             
         );

@@ -15,9 +15,6 @@ const MainNavigator = createStackNavigator({
     Join: {screen: JoinGroup},
     Create: {screen: CreateGroup},
     Game: {screen:Game}
-
-
-
 });
 
 const AppContainer = createAppContainer(MainNavigator);
