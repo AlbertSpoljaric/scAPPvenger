@@ -2,10 +2,16 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Game from '../screens/Game';
 import GameEnd from '../screens/GameEnd';
+import MainMenu from '../screens/MainMenu';
+import JoinGroup from '../screens/JoinGroup'
+import CreateGroup from '../screens/CreateGroup';
 
 const MainNavigator = createStackNavigator({
-    Main: {screen: Game},
-    EndScreen: {screen: GameEnd}
+    Main: {screen: MainMenu},
+    EndScreen: {screen: GameEnd},
+    Join: {screen: JoinGroup},
+    Create: {screen: CreateGroup},
+    GameScreen: {screen:Game}
 });
 
 const AppContainer = createAppContainer(MainNavigator);
