@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Game from '../components/Game';
-import GameEnd from '../components/GameEnd';
+import Game from '../screens/Game';
+import GameEnd from '../screens/GameEnd';
 
 const MainNavigator = createStackNavigator({
     Main: {screen: Game},
