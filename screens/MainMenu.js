@@ -32,7 +32,7 @@ export default class MainMenu extends React.Component {
     }
 
     joinGroup=()=>{
-        this.props.navigation.navigate('Join')
+        this.props.navigation.navigate('Join', {socket:this.socket, join:true})
     }
 
     createGroup=()=>{

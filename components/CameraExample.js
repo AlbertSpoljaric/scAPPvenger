@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
-
+import BackButton from '../components/BackButton';
 
 export default class CameraExample extends React.Component {
   state = {
@@ -18,14 +18,22 @@ export default class CameraExample extends React.Component {
   toggleBarcodeScanning = () => this.setState({ barcodeScanning: !this.state.barcodeScanning });
 
   onBarCodeScanned = code => {
-    this.setState(
-      { barcodeScanning: !this.state.barcodeScanning },
-    );
-    if (code.data == this.props.data.game_order[this.props.data.score]) {
-      Alert.alert(`Congratulations! You have found the correct QR-code!`)
-      this.props.changeScore();
-    } else {
-      Alert.alert(`Wrong QR-code! Continue searching!`)
+    if (this.props.join) {
+      this.setState(
+        { barcodeScanning: !this.state.barcodeScanning },
+      );
+      Alert.alert('Emit ' + code.data + ' via websocket') 
+    }
+    else {
+      this.setState(
+        { barcodeScanning: !this.state.barcodeScanning },
+      );
+      if (code.data == this.props.data.game_order[this.props.data.score]) {
+        Alert.alert(`Congratulations! You have found the correct QR-code!`)
+        this.props.changeScore();
+      } else {
+        Alert.alert(`Wrong QR-code! Continue searching!`)
+      }
     }
   };
 
@@ -40,7 +48,10 @@ export default class CameraExample extends React.Component {
       </View>
     );
 
+
   render() {
+    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
+    let backBtn = this.props.join ? <BackButton goBack={this.props.goBack}/> : null ;
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -49,7 +60,7 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{this.props.data.current_clue[this.props.data.score]}</Text>
+          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
             style={{ flex: 1 }}
@@ -124,6 +135,7 @@ export default class CameraExample extends React.Component {
                 </Text>
               </TouchableOpacity>
             </View>
+            {backBtn}
           </Camera>
         </View>
       );

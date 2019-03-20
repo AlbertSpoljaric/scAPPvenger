@@ -1,18 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import CameraExample from '../components/CameraExample';
 
 export default class JoinGroup extends React.Component {
+    constructor(props) {
+        super(props)
+        this.socket = props.navigation.state.params.socket;
+        this.join = props.navigation.state.params.join;
+        this.state = {
+        }
+    }
     static navigationOptions = {
         header: null
     }
-    state = {
+    goBack=()=>{
+        this.props.navigation.goBack();
     }
+    
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Welcome to join the group!</Text>
-            </View>
-        );
+            <CameraExample goBack={this.goBack} join={this.join} socket={this.socket} />
+        );s
     }
 }
 
