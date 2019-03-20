@@ -1,10 +1,12 @@
 {
-  "packagerPort": 19001,
-  "packagerPid": 75712,
-  "expoServerPort": 19000,
+
+  "packagerPort": 19005,
+  "packagerPid": 509840,
+  "expoServerPort": 19004,
   "webpackServerPort": null,
-  "expoServerNgrokUrl": "https://c4-ds9.anonymous.scappvenger.exp.direct",
-  "packagerNgrokUrl": "https://packager.c4-ds9.anonymous.scappvenger.exp.direct",
-  "ngrokPid": 65968,
-  "devToolsPort": 19002
+  "expoServerNgrokUrl": "https://pf-u5z.anonymous.scappvenger.exp.direct",
+  "packagerNgrokUrl": "https://packager.pf-u5z.anonymous.scappvenger.exp.direct",
+  "ngrokPid": 511744,
+  "devToolsPort": 19003
+
 }
