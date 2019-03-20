@@ -12,9 +12,10 @@ export default class StartApp extends React.Component {
             if (data.error) {
                 Alert.alert(data.error)
             } else if (data.username) {
-               props.navigation.navigate('EndScreen')
+               props.navigation.navigate('MainMenu', {socket:this.socket})
             }
-        })
+        }.bind(this))
+
         this.state = {
             text: 'Placeholder',
         }
@@ -25,6 +26,7 @@ export default class StartApp extends React.Component {
         header: null
     }
     sendUsername() {
+        console.log(this.socket.io.engine.id)
         var data = {
             username: this.state.text
         }
