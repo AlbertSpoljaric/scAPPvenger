@@ -2,10 +2,13 @@ import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Game from '../screens/Game';
 import GameEnd from '../screens/GameEnd';
+import StartApp from '../screens/StartApp';
+
 
 const MainNavigator = createStackNavigator({
-    Main: {screen: Game},
-    EndScreen: {screen: GameEnd}
+    Main: { screen: StartApp},
+    Game: { screen: Game },
+    EndScreen: { screen: GameEnd }
 });
 
 const AppContainer = createAppContainer(MainNavigator);
@@ -14,6 +17,6 @@ const AppContainer = createAppContainer(MainNavigator);
 
 export default class AppNavigator extends React.Component {
     render() {
-      return <AppContainer />;
+        return <AppContainer />;
     }
-  }
+}
