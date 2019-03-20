@@ -1,4 +1,5 @@
 {
+
   "packagerPort": 19005,
   "packagerPid": 509840,
   "expoServerPort": 19004,
@@ -7,4 +8,5 @@
   "packagerNgrokUrl": "https://packager.pf-u5z.anonymous.scappvenger.exp.direct",
   "ngrokPid": 511744,
   "devToolsPort": 19003
+
 }
