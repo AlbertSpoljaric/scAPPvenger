@@ -36,7 +36,7 @@ export default class MainMenu extends React.Component {
     }
 
     createGroup=()=>{
-        this.props.navigation.navigate('Create')
+        this.props.navigation.navigate('Create', {socket:this.socket})
     }
 
     testSocket=()=>{
