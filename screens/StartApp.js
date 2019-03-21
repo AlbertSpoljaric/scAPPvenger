@@ -37,10 +37,10 @@ export default class StartApp extends React.Component {
     render() {
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Text>Welcome to the scavenger hunt! Please insert your name.</Text>
                 <TextInput
-                    style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                    style={{ height: 40, width:100, borderColor: 'gray', borderWidth: 1 }}
                     onChangeText={(text) => this.setState({ text })}
                     value={this.state.text}
                 />
@@ -53,3 +53,13 @@ export default class StartApp extends React.Component {
         );
     }
 }
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      textAlign: 'center',
+      height: 150
+    },
+  });

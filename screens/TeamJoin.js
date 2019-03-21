@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { Image } from 'react-native-elements';
 import QRCode from 'react-native-qrcode';
-
 
 
 export default class TeamJoin extends React.Component {
@@ -12,11 +10,19 @@ export default class TeamJoin extends React.Component {
         this.socket = props.navigation.state.params.socket;
         this.data = props.navigation.state.params.data;
 
-
-
         this.state = {
             valueForQRCode: this.data.groupId,
+            groupSize: this.data.playerCount,
+            notEnoughPlayers: true
         }
+
+        this.socket.on('groupjoin', function(data){
+            this.setState({groupSize:data.playerCount});
+            console.log();
+            if (this.state.groupSize>2){
+                this.setState({notEnoughPlayers:false})
+            }
+        }.bind(this))
     }
     static navigationOptions = {
         header: null
@@ -30,11 +36,16 @@ export default class TeamJoin extends React.Component {
     search for the right imgUri with the id.  */
 
     render() {
+    let okBtn = this.state.notEnoughPlayers === true ? <TouchableOpacity disabled={true} onPress={this.teamReady} title="Team Ready" ><Text>Waiting for team members!</Text></TouchableOpacity> : <TouchableOpacity onPress={this.teamReady} title="Team Ready" ><Text>OK, ready for the game!</Text></TouchableOpacity>;
+         
         return (
             <View style={styles.container}>
-                <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
-
-                <QRCode
+                <View style={styles.infoText}>
+                    <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
+                    <Text>You need at least 3 people in your team:</Text>
+                    <Text>Group size: {this.state.groupSize}</Text>
+                </View>
+                <QRCode 
                     value={this.state.valueForQRCode}
                     //Setting the value of QRCode
                     size={300}
@@ -45,12 +56,8 @@ export default class TeamJoin extends React.Component {
                     //Front Color of QRCode
                 />
 
-                <Text>Click OK when your group has scanned the QR-code.</Text>
-                <TouchableOpacity
-                    onPress={this.teamReady}
-                    title="Team Ready"
-                    color="#841584"
-                ><Text>OK</Text></TouchableOpacity>
+                <Text style={styles.infoText}>Click OK when your group has scanned the QR-code.</Text>
+                {okBtn}
 
             </View>
         );
@@ -66,4 +73,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 150
     },
+    infoText:{
+        margin: 20,
+        padding: 10
+    }
 });
