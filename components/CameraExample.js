@@ -4,11 +4,27 @@ import { Camera, Permissions, BarCodeScanner } from 'expo';
 import BackButton from '../components/BackButton';
 
 export default class CameraExample extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-    barcodeScanning: false,
-  };
+  constructor(props) {
+    super(props)
+
+    this.socket = this.props.socket;
+
+    this.socket.on('groupjoin', function (data) {
+      if (data.error) {
+        Alert.alert(data.error)
+      } else if (data.groupname) {
+        this.props.teamWait(data);
+
+      }
+    }.bind(this))
+
+    this.state = {
+      hasCameraPermission: null,
+      type: Camera.Constants.Type.back,
+      barcodeScanning: false,
+    };
+  }
+
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -22,7 +38,11 @@ export default class CameraExample extends React.Component {
       this.setState(
         { barcodeScanning: !this.state.barcodeScanning },
       );
-      Alert.alert('Emit ' + code.data + ' via websocket') 
+      let joinThis = code.data;
+      let data = {
+        groupId: joinThis
+      }
+      this.socket.emit('newuser', data);
     }
     else {
       this.setState(
@@ -51,7 +71,7 @@ export default class CameraExample extends React.Component {
 
   render() {
     let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
-    let backBtn = this.props.join ? <BackButton goBack={this.props.goBack}/> : null ;
+    let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
