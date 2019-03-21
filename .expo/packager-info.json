@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "packagerPort": null,
   "packagerPid": null,
   "expoServerPort": null,
@@ -8,14 +7,4 @@
   "packagerNgrokUrl": null,
   "ngrokPid": null,
   "devToolsPort": 19002
-=======
-  "devToolsPort": 19003,
-  "expoServerPort": 19004,
-  "packagerPort": 19005,
-  "packagerPid": 528988,
-  "expoServerNgrokUrl": "https://c4-ds9.anonymous.scappvenger.exp.direct",
-  "packagerNgrokUrl": "https://packager.c4-ds9.anonymous.scappvenger.exp.direct",
-  "ngrokPid": 518788,
-  "webpackServerPort": null
->>>>>>> albert
 }

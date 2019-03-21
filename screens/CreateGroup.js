@@ -11,7 +11,8 @@ export default class CreateGroup extends React.Component {
             if (data.error) {
                 Alert.alert(data.error)
             } else if (data.groupname) {
-               props.navigation.navigate('Game', {socket:this.socket, data: data})
+        
+               props.navigation.navigate('TeamJoin', {socket:this.socket, data: data})
             }
         }.bind(this))
 
