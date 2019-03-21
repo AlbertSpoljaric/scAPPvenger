@@ -7,14 +7,13 @@ export default class CameraExample extends React.Component {
   constructor(props) {
     super(props)
 
-    this.socket = this.props.socket;
+    this.socket = props.socket; // changed
 
     this.socket.on('groupjoin', function (data) {
       if (data.error) {
         Alert.alert(data.error)
       } else if (data.groupname) {
-        this.props.teamWait(data);
-
+        props.teamWait(data); // changed
       }
     }.bind(this))
 
@@ -33,21 +32,17 @@ export default class CameraExample extends React.Component {
 
   toggleBarcodeScanning = () => this.setState({ barcodeScanning: !this.state.barcodeScanning });
 
-  onBarCodeScanned = code => {
+  onBarCodeScanned = (code) => {
     if (this.props.join) {
-      this.setState(
-        { barcodeScanning: !this.state.barcodeScanning },
-      );
-      let joinThis = code.data;
+      console.log(code);
+      let groupid = parseInt(code.data);
       let data = {
-        groupId: joinThis
-      }
+        groupId: groupid
+      };
+      console.log(data);
       this.socket.emit('newuser', data);
     }
     else {
-      this.setState(
-        { barcodeScanning: !this.state.barcodeScanning },
-      );
       if (code.data == this.props.data.game_order[this.props.data.score]) {
         Alert.alert(`Congratulations! You have found the correct QR-code!`)
         this.props.changeScore();
@@ -55,6 +50,9 @@ export default class CameraExample extends React.Component {
         Alert.alert(`Wrong QR-code! Continue searching!`)
       }
     }
+    this.setState(
+      { barcodeScanning: !this.state.barcodeScanning },
+    );
   };
 
   renderMoreOptions = () =>
@@ -147,7 +145,7 @@ export default class CameraExample extends React.Component {
                   alignItems: 'center',
                 }}
                 onPress={() => {
-                  this.setState({ barcodeScanning: !this.state.barcodeScanning });
+                  this.setState({ barcodeScanning: true });
                 }}>
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>

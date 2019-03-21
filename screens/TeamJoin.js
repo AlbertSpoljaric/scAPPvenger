@@ -14,10 +14,11 @@ export default class TeamJoin extends React.Component {
         this.socket = props.navigation.state.params.socket;
         this.data = props.navigation.state.params.data;
 
-
+        console.log(this.data);
 
         this.state = {
-            valueForQRCode: ''+this.data.groupId,
+            valueForBarCode: "" + this.data.groupId,
+            valueForQRCode: "" + this.data.groupId
         }
     }
     static navigationOptions = {
@@ -34,10 +35,20 @@ export default class TeamJoin extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-            
 
-            <Barcode value={this.state.valueForQRCode} format="CODE128" />
-                
+
+                <Barcode value={this.state.valueForBarCode} format="CODE128" />
+                <QRCode
+                    value={this.state.valueForQRCode}
+                    //Setting the value of QRCode
+                    size={300}
+                    //Size of QRCode
+                    bgColor="#000"
+                    //Backgroun Color of QRCode
+                    fgColor="#fff"
+                //Front Color of QRCode
+
+                />
 
                 <TouchableOpacity
                     onPress={this.teamReady}
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 150,
     },
-    border:{
+    border: {
         borderStyle: 'solid',
         borderWidth: 20,
         borderColor: '#000',

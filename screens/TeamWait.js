@@ -18,7 +18,7 @@ export default class TeamWait extends React.Component {
 
 
         this.state = {
-            valueForQRCode: ''+this.data.groupId,
+            valueForQRCode: ""+this.data.groupId,
         }
     }
     static navigationOptions = {
