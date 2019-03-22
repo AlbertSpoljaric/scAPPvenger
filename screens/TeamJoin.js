@@ -1,9 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
-import { Image } from 'react-native-elements';
 import QRCode from 'react-native-qrcode';
 import Barcode from 'react-native-barcode-builder';
-
 
 
 
@@ -18,65 +16,60 @@ export default class TeamJoin extends React.Component {
 
         this.state = {
             valueForBarCode: "" + this.data.groupId,
-            valueForQRCode: "" + this.data.groupId
+            valueForQRCode: "" + this.data.groupId,
+            groupSize: this.data.playerCount,
+            notEnoughPlayers: true
+
         }
+
+        this.socket.on('groupjoin', function (data) {
+            this.setState({ groupSize: data.playerCount });
+            console.log();
+            if (this.state.groupSize > 2) {
+                this.setState({ notEnoughPlayers: false })
+            }
+        }.bind(this))
     }
     static navigationOptions = {
         header: null
     }
 
     teamReady = () => {
-        this.props.navigation.navigate('Game', { socket: this.socket, data: this.data })
+        this.props.navigation.navigate('Game', { socket: this.socket, data: this.data, groupSize: this.state.groupSize })
     }
 
-    /* {id:1, imgUri: require(`../images/1.png`)}
-    search for the right imgUri with the id.  */
 
     render() {
+        let okBtn = this.state.notEnoughPlayers === true ? <TouchableOpacity disabled={true} onPress={this.teamReady} title="Team Ready" ><Text>Waiting for team members!</Text></TouchableOpacity> : <TouchableOpacity onPress={this.teamReady} title="Team Ready" ><Text>OK, ready for the game!</Text></TouchableOpacity>;
+
         return (
             <View style={styles.container}>
 
+                <View style={styles.infoText}>
+                    <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
+                    <Text>You need at least 3 people in your team:</Text>
+                    <Text>Group size: {this.state.groupSize}</Text>
+                </View>
 
                 <Barcode value={this.state.valueForBarCode} format="CODE128" />
                 <QRCode
-                    value={this.state.valueForQRCode}
-                    //Setting the value of QRCode
-                    size={150}
-                    //Size of QRCode
-                    bgColor="#000"
-                    //Backgroun Color of QRCode
-                    fgColor="#fff"
-                //Front Color of QRCode
+                value={this.state.valueForQRCode}
+                //Setting the value of QRCode
+                size={150}
+                //Size of QRCode
+                bgColor="#000"
+                //Backgroun Color of QRCode
+                fgColor="#fff"
+            //Front Color of QRCode
 
-                />
-
-                <TouchableOpacity
-                    onPress={this.teamReady}
-                    title="Team Ready"
-                    color="#841584"
-                ><Text>OK</Text></TouchableOpacity>
-
-            </View>
+            />
+                <Text style={styles.infoText}>Click OK when your group has scanned the QR-code.</Text>
+                {okBtn}
+            </View >
         );
     }
 }
-// <Text>Click OK when your group has scanned the QR-code.</Text>
-// <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
-/*
-<View style={styles.border}>
-                    <QRCode
-                        value={this.state.valueForQRCode}
-                        //Setting the value of QRCode
-                        size={300}
-                        //Size of QRCode
-                        bgColor="#F00"
-                        //Backgroun Color of QRCode
-                        fgColor="#fff"
-                    //Front Color of QRCode
 
-                    />
-                </View>
-*/
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -86,9 +79,8 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 150,
     },
-    border: {
-        borderStyle: 'solid',
-        borderWidth: 20,
-        borderColor: '#000',
+    infoText:{
+        margin: 20,
+        padding: 10
     }
 });
