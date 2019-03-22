@@ -41,7 +41,7 @@ export default class TeamJoin extends React.Component {
                 <QRCode
                     value={this.state.valueForQRCode}
                     //Setting the value of QRCode
-                    size={300}
+                    size={150}
                     //Size of QRCode
                     bgColor="#000"
                     //Backgroun Color of QRCode

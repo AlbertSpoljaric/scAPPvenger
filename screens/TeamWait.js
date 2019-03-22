@@ -17,8 +17,9 @@ export default class TeamWait extends React.Component {
 
 
 
-        this.state = {
-            valueForQRCode: ""+this.data.groupId,
+        this.state = { // added QR and Bar
+            valueForBarCode: "" + this.data.groupId,
+            valueForQRCode: "" + this.data.groupId
         }
     }
     static navigationOptions = {
@@ -37,7 +38,18 @@ export default class TeamWait extends React.Component {
             <View style={styles.container}>
                 <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
 
-                <Barcode value={this.state.valueForQRCode} format="CODE128" />
+                <Barcode value={this.state.valueForBarCode} format="CODE128" />
+                <QRCode
+                    value={this.state.valueForQRCode}
+                    //Setting the value of QRCode
+                    size={150}
+                    //Size of QRCode
+                    bgColor="#000"
+                    //Backgroun Color of QRCode
+                    fgColor="#fff"
+                //Front Color of QRCode
+
+                />
 
                 <Text>WAITING FOR TEAM... HOLD TIGHT!</Text>
 

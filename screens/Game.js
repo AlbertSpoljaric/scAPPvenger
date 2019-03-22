@@ -23,7 +23,7 @@ export default class Game extends React.Component {
     }
     render() {
         return (
-            <CameraExample data={this.state} changeScore={this.changeScore} />
+            <CameraExample data={this.state} changeScore={this.changeScore} socket={this.socket} />
         );
     }
 }

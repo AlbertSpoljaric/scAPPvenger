@@ -100,10 +100,7 @@ export default class CameraExample extends React.Component {
             barCodeScannerSettings={{
               barCodeTypes: [
                 BarCodeScanner.Constants.BarCodeType.qr,
-                BarCodeScanner.Constants.BarCodeType.pdf417,
-                BarCodeScanner.Constants.BarCodeType.ean13,
-                BarCodeScanner.Constants.BarCodeType.ean8,
-                BarCodeScanner.Constants.BarCodeType.code128,
+                BarCodeScanner.Constants.BarCodeType.code128
               ],
             }}
             onBarCodeScanned={this.state.barcodeScanning ? this.onBarCodeScanned : undefined}>
