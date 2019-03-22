@@ -4,14 +4,23 @@ import CameraExample from '../components/CameraExample';
 
 
 export default class Game extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.socket = props.navigation.state.params.socket;
+        this.data = props.navigation.state.params.data;
+        this.groupSize = props.navigation.state.params.groupSize;
+
+        this.state = {
+            current_clue: ['This is the first mock clue!', 'This is the second mock clue!', 'This is the third mock clue!', 'This is the fourth mock clue!', 'This is the fifth mock clue!'],
+            game_order: this.data.gameorder,
+            score: this.data.score,
+        }
+    }
     static navigationOptions = {
         header: null
     }
-    state = {
-        current_clue: ['This is the first mock clue!', 'This is the second mock clue!', 'This is the third mock clue!', 'This is the fourth mock clue!', 'This is the fifth mock clue!'],
-        game_order: [1, 2, 3, 4, 5],
-        score: 0
-    }
+
     changeScore = () => {
         if (this.state.score === 4) { // === games.length - 1 
             this.props.navigation.navigate('EndScreen')
@@ -23,7 +32,7 @@ export default class Game extends React.Component {
     }
     render() {
         return (
-            <CameraExample data={this.state} changeScore={this.changeScore} />
+            <CameraExample data={this.state} changeScore={this.changeScore} socket={this.socket} />
         );
     }
 }

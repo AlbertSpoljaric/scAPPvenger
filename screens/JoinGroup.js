@@ -17,10 +17,14 @@ export default class JoinGroup extends React.Component {
         this.props.navigation.goBack();
     }
     
+    teamWait=(data)=>{
+        this.props.navigation.navigate('TeamWait', { socket: this.socket, data: data })
+    }
+
     render() {
         return (
-            <CameraExample goBack={this.goBack} join={this.join} socket={this.socket} />
-        );s
+            <CameraExample goBack={this.goBack} join={this.join} socket={this.socket} teamWait={this.teamWait}/>
+        );
     }
 }
 

@@ -8,6 +8,7 @@ import JoinGroup from '../screens/JoinGroup'
 import CreateGroup from '../screens/CreateGroup';
 import StartApp from '../screens/StartApp';
 import TeamJoin from '../screens/TeamJoin';
+import TeamWait from '../screens/TeamWait';
 
 const MainNavigator = createStackNavigator({
     Main: { screen: StartApp},
@@ -16,7 +17,8 @@ const MainNavigator = createStackNavigator({
     Join: {screen: JoinGroup},
     Create: {screen: CreateGroup},
     Game: {screen:Game},
-    TeamJoin: { screen: TeamJoin }
+    TeamJoin: { screen: TeamJoin },
+    TeamWait: { screen: TeamWait}
 });
 
 const AppContainer = createAppContainer(MainNavigator);
