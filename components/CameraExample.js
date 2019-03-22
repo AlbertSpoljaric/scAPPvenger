@@ -1,14 +1,34 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
-
+import BackButton from '../components/BackButton';
 
 export default class CameraExample extends React.Component {
-  state = {
-    hasCameraPermission: null,
-    type: Camera.Constants.Type.back,
-    barcodeScanning: false,
-  };
+  constructor(props) {
+    super(props)
+
+    this.socket = props.socket; // changed
+
+    this.socket.on('groupjoin', function (data) {
+      if (data.error) {
+        Alert.alert(data.error)
+      } else if (data.groupname) {
+        props.teamWait(data); // changed
+        this.setState({
+          hasCameraPermission: null,
+          type: Camera.Constants.Type.back,
+          barcodeScanning: false,
+        })
+      }
+    }.bind(this))
+
+    this.state = {
+      hasCameraPermission: null,
+      type: Camera.Constants.Type.back,
+      barcodeScanning: false,
+    };
+  }
+
 
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -17,16 +37,27 @@ export default class CameraExample extends React.Component {
 
   toggleBarcodeScanning = () => this.setState({ barcodeScanning: !this.state.barcodeScanning });
 
-  onBarCodeScanned = code => {
+  onBarCodeScanned = (code) => {
+    if (this.props.join) {
+      console.log(code);
+      let groupid = parseInt(code.data);
+      let data = {
+        groupId: groupid
+      };
+      console.log(data);
+      this.socket.emit('newuser', data);
+    }
+    else {
+      if (code.data == this.props.data.game_order[this.props.data.score]) {
+        Alert.alert(`Congratulations! You have found the correct QR-code!`)
+        this.props.changeScore();
+      } else {
+        Alert.alert(`Wrong QR-code! Continue searching!`)
+      }
+    }
     this.setState(
       { barcodeScanning: !this.state.barcodeScanning },
     );
-    if (code.data == this.props.data.game_order[this.props.data.score]) {
-      Alert.alert(`Congratulations! You have found the correct QR-code!`)
-      this.props.changeScore();
-    } else {
-      Alert.alert(`Wrong QR-code! Continue searching!`)
-    }
   };
 
   renderMoreOptions = () =>
@@ -40,7 +71,11 @@ export default class CameraExample extends React.Component {
       </View>
     );
 
+
   render() {
+    // qr-code button if not join camera
+    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
+    let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -49,7 +84,7 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{this.props.data.current_clue[this.props.data.score]}</Text>
+          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
             style={{ flex: 1 }}
@@ -71,10 +106,7 @@ export default class CameraExample extends React.Component {
             barCodeScannerSettings={{
               barCodeTypes: [
                 BarCodeScanner.Constants.BarCodeType.qr,
-                BarCodeScanner.Constants.BarCodeType.pdf417,
-                BarCodeScanner.Constants.BarCodeType.ean13,
-                BarCodeScanner.Constants.BarCodeType.ean8,
-                BarCodeScanner.Constants.BarCodeType.code128,
+                BarCodeScanner.Constants.BarCodeType.code128
               ],
             }}
             onBarCodeScanned={this.state.barcodeScanning ? this.onBarCodeScanned : undefined}>
@@ -116,7 +148,7 @@ export default class CameraExample extends React.Component {
                   alignItems: 'center',
                 }}
                 onPress={() => {
-                  this.setState({ barcodeScanning: !this.state.barcodeScanning });
+                  this.setState({ barcodeScanning: true });
                 }}>
                 <Text
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
@@ -124,6 +156,7 @@ export default class CameraExample extends React.Component {
                 </Text>
               </TouchableOpacity>
             </View>
+            {backBtn}
           </Camera>
         </View>
       );

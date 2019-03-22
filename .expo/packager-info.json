@@ -1,10 +1,10 @@
 {
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerPort": null,
+  "expoServerPort": 19000,
   "webpackServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
-  "devToolsPort": 19003
+  "expoServerNgrokUrl": "https://aj-uma.anonymous.scappvenger.exp.direct",
+  "packagerNgrokUrl": "https://packager.aj-uma.anonymous.scappvenger.exp.direct",
+  "ngrokPid": 141268,
+  "devToolsPort": 19002,
+  "packagerPort": 19001,
+  "packagerPid": 140628
 }

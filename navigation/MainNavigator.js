@@ -1,11 +1,24 @@
 import React from 'react';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
-import Game from '../components/Game';
-import GameEnd from '../components/GameEnd';
+import Game from '../screens/Game';
+import GameEnd from '../screens/GameEnd';
+
+import MainMenu from '../screens/MainMenu';
+import JoinGroup from '../screens/JoinGroup'
+import CreateGroup from '../screens/CreateGroup';
+import StartApp from '../screens/StartApp';
+import TeamJoin from '../screens/TeamJoin';
+import TeamWait from '../screens/TeamWait';
 
 const MainNavigator = createStackNavigator({
-    Main: {screen: Game},
-    EndScreen: {screen: GameEnd}
+    Main: { screen: StartApp},
+    MainMenu: {screen: MainMenu},
+    EndScreen: {screen: GameEnd},
+    Join: {screen: JoinGroup},
+    Create: {screen: CreateGroup},
+    Game: {screen:Game},
+    TeamJoin: { screen: TeamJoin },
+    TeamWait: { screen: TeamWait}
 });
 
 const AppContainer = createAppContainer(MainNavigator);
@@ -14,6 +27,6 @@ const AppContainer = createAppContainer(MainNavigator);
 
 export default class AppNavigator extends React.Component {
     render() {
-      return <AppContainer />;
+        return <AppContainer />;
     }
-  }
+}
