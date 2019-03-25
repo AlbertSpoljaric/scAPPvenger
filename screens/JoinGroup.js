@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import CameraExample from '../components/CameraExample';
 
+
 export default class JoinGroup extends React.Component {
     constructor(props) {
         super(props)
@@ -18,7 +19,12 @@ export default class JoinGroup extends React.Component {
     }
     
     teamWait=(data)=>{
+        console.log(data);
+        if (data.state==2){
+            this.props.navigation.navigate('Game', {socket:this.socket, data:data})
+        } else{
         this.props.navigation.navigate('TeamWait', { socket: this.socket, data: data })
+        }
     }
 
     render() {

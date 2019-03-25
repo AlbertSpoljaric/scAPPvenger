@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        height: 150,
+        // height: 150,
     },
     infoText: {
         margin: 20,

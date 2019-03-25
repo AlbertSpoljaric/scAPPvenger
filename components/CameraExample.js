@@ -11,6 +11,7 @@ export default class CameraExample extends React.Component {
     this.socket = props.socket; // changed
 
     this.socket.on('groupjoin', function (data) {
+      if(this.props.join){
       if (data.error) {
         Alert.alert(data.error)
       } else if (data.groupname) {
@@ -21,7 +22,7 @@ export default class CameraExample extends React.Component {
           barcodeScanning: false,
         })
       }
-    }.bind(this))
+    }}.bind(this))
 
     this.state = {
       hasCameraPermission: null,
@@ -75,7 +76,7 @@ export default class CameraExample extends React.Component {
 
   render() {
     // qr-code button if not join camera
-    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
+    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue;
     let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
     let qrModal = this.props.join ? null : <TouchableOpacity><QrModal data={this.props.data}></QrModal></TouchableOpacity>
     const { hasCameraPermission } = this.state;

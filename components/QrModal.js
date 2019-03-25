@@ -20,17 +20,20 @@ export default class QrModal extends Component {
           visible={this.state.modalVisible}
           >
           <View style={styles.container}>
-            <View>
+            <View style={styles.infoText}>
+              <Text>Did your team mate drop out of game? Let them scan this QR code and get back in the game!</Text>
+            </View>
+            <View style={styles.code}>
               <CodeGen bar = {this.props.data.groupId} qr ={this.props.data.groupId}></CodeGen>
-
-              <TouchableHighlight
+            </View>
+            <TouchableHighlight
                 style= {styles.button}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
-            </View>
+                <Text>Return to Game</Text>
+            </TouchableHighlight>
+
           </View>
         </Modal>
 
@@ -39,7 +42,7 @@ export default class QrModal extends Component {
             onPress={() => {
                 this.setModalVisible(true);
             }}>
-          <Text>Show Modal</Text>
+          <Text>Team QR Code</Text>
         </TouchableHighlight>
       </View>
     );
@@ -59,6 +62,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        height: 150,
-    }
+        // height: 150,
+    },
+    code:{
+      flex: 0.5
+    },
+    infoText: {
+      textAlign: 'center',
+      alignItems: 'center'  
+    },
   });
