@@ -17,7 +17,7 @@ export default class StartApp extends React.Component {
         }.bind(this))
 
         this.state = {
-            text: 'Placeholder',
+            text: 'Your name here',
         }
 
         this.sendUsername = this.sendUsername.bind(this);
@@ -38,17 +38,27 @@ export default class StartApp extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Text>Welcome to the scavenger hunt! Please insert your name.</Text>
+                <Text style={{ 
+                    fontWeight: 'bold',
+                    fontSize: 40,
+                    textAlign: 'center'
+                    }}>
+                    Welcome to the Scavenger hunt!
+                </Text>
+                <Text style={{
+                    fontSize: 30, marginTop: 40
+                }}>Please insert your name.</Text>
                 <TextInput
-                    style={{ height: 40, width:100, borderColor: 'gray', borderWidth: 1 }}
+                    style={{ textAlign:'center', fontSize: 30 , height: 50, width:200, borderColor: 'gray', borderBottomWidth: 1 }}
+                    placeholder="Your name"
                     onChangeText={(text) => this.setState({ text })}
-                    value={this.state.text}
+                    // value={this.state.text}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity
                     onPress={this.sendUsername}
                     title="Send username!"
-                    color="#841584"
-                ><Text>CLICK ME</Text></TouchableOpacity>
+                    style= {styles.button}
+                ><Text style={{ color: '#fff'}}>CLICK ME</Text></TouchableOpacity>
             </View>
         );
     }
@@ -56,10 +66,20 @@ export default class StartApp extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#ff9d0a',
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
-      height: 150
+      height: 150,
+
     },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#000000',
+        width: 100, height: 50,
+        padding: 10,
+        margin: 10
+    }
+
   });

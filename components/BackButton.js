@@ -9,13 +9,13 @@ export default class BackButton extends React.Component {
   };
 
   render() {
-
+  
       return (
         <TouchableOpacity
             onPress={this.props.goBack}
             style={styles.button}
         >
-            <Text>Back</Text>
+            <Text style= {{color:'#fff'}}>Back</Text>
         </TouchableOpacity>
         
       )
@@ -26,7 +26,7 @@ export default class BackButton extends React.Component {
 const styles = StyleSheet.create({
     button: {
       alignItems: 'center',
-      backgroundColor: '#c12cc1',
+      backgroundColor: '#000000',
       padding: 10,
       margin: 10
     }

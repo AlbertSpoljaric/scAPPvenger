@@ -15,7 +15,7 @@ export default class JoinGroupButton extends React.Component {
           onPress={this.props.joinGroup}
           style={styles.button}
         >
-          <Text>Join Group</Text>
+          <Text style= {{color:'#fff', fontSize: 40, fontWeight: 'bold'}}>Join Group</Text>
         </TouchableOpacity>
         
       )
@@ -26,8 +26,10 @@ export default class JoinGroupButton extends React.Component {
 const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
-    backgroundColor: '#c12cc1',
+    justifyContent: 'center',
+    backgroundColor: '#000000',
+    width: 270, height: 80,
     padding: 10,
     margin: 10
-  }
+}
 })

@@ -10,7 +10,7 @@ export default class GameEnd extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>CONGRATULATIONS! YOU HAVE WON THE GAME! FIND THE GAME ADMINS!</Text>
+                <Text style={styles.info}>CONGRATULATIONS! YOU HAVE WON THE GAME! FIND THE GAME ADMINS!</Text>
             </View>
         );
     }
@@ -19,10 +19,13 @@ export default class GameEnd extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
         height: 150,
+    },
+    info:{
+        textAlign: 'center'
     }
 });

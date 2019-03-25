@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert} from 'react-native';
 import CameraExample from '../components/CameraExample';
 
 
@@ -12,6 +12,11 @@ export default class Game extends React.Component {
         this.groupSize = props.navigation.state.params.groupSize;
 
         this.socket.on('increasescore', function(data){
+            Alert.alert('Your team has found a correct QR code!');
+            this.setState({score:data.score})
+            if(data.score==5){
+                this.props.navigation.navigate('EndScreen');
+            }
             this.setState({current_clue:data.nextClue})
         }.bind(this))
 
@@ -27,15 +32,15 @@ export default class Game extends React.Component {
     }
 
     changeScore = () => {
-        if (this.state.score === 4) { // === games.length - 1 
-            this.socket.emit('cluecorrect');
-            this.props.navigation.navigate('EndScreen')
-        } else {
-            this.setState({
-                score: (this.state.score + 1)
-            })
+        // if (this.state.score === 4) { // === games.length - 1 
+        //     this.socket.emit('cluecorrect');
+        //     this.props.navigation.navigate('EndScreen')
+        // } else {
+        //     this.setState({
+        //         score: (this.state.score + 1)
+        //     })
             this.socket.emit('cluecorrect')
-        }
+        // }
     }
     render() {
         return (

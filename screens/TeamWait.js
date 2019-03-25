@@ -16,7 +16,7 @@ export default class TeamWait extends React.Component {
         this.data = props.navigation.state.params.data;
 
         this.socket.on('letsplay', function (data) {
-            this.props.navigation.navigate('Game', { socket: this.socket, data: this.data })
+            this.props.navigation.navigate('Instructions', { socket: this.socket, data: this.data })
         }.bind(this))
 
         this.state = { // added QR and Bar

@@ -51,7 +51,7 @@ export default class CameraExample extends React.Component {
     }
     else {
       if (code.data == this.props.data.game_order[this.props.data.score]) {
-        Alert.alert(`Congratulations! You have found the correct QR-code!`)
+        // Alert.alert(`Congratulations! You have found the correct QR-code!`)
         this.props.changeScore();
       } else {
         Alert.alert(`Wrong QR-code! Continue searching!`)
@@ -87,7 +87,7 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
+          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a' }}><Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
             style={{ flex: 1}}
@@ -119,7 +119,7 @@ export default class CameraExample extends React.Component {
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
               }}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{
                   flex: 0.2,
                   alignSelf: 'flex-end',
@@ -136,7 +136,7 @@ export default class CameraExample extends React.Component {
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
                   {' '}Flip{' '}
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <View
               style={{
@@ -146,16 +146,20 @@ export default class CameraExample extends React.Component {
               }}>
               <TouchableOpacity
                 style={{
-                  flex: 0.2,
-                  alignSelf: 'flex-end',
+                  // flex: 0.2,
+                  // alignSelf: 'flex-end',
                   alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#6EC5B8',
+                  padding: 10,
+                  margin: 10
                 }}
                 onPress={() => {
                   this.setState({ barcodeScanning: true });
                 }}>
                 <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}SCAN{' '}
+                  style={{ fontSize: 18, color: 'white' }}>
+                  SCAN
                 </Text>
               </TouchableOpacity>
             </View>

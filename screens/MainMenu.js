@@ -25,7 +25,6 @@ export default class MainMenu extends React.Component {
     static navigationOptions = {
         header: null
     }
-    state={}
 
     goBack=()=>{
         this.props.navigation.goBack();
@@ -49,12 +48,11 @@ export default class MainMenu extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <BackButton goBack={this.goBack}/>
+                <BackButton style={styles.button} goBack={this.goBack}/>
                 <View >
                     <JoinGroupButton joinGroup ={this.joinGroup}/>
                     <CreateGroupButton createGroup = {this.createGroup}/>
                 </View>
-                <TouchableOpacity onPress={this.testSocket}><Text>TEST</Text></TouchableOpacity>
             </View>
             
         );
@@ -64,10 +62,18 @@ export default class MainMenu extends React.Component {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#fff',
+      backgroundColor: '#ff9d0a',
       alignItems: 'center',
       justifyContent: 'center',
       textAlign: 'center',
-      height: 150
+
     },
+    button: {
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#000000',
+          width: 270, height: 80,
+          padding: 10,
+          margin: 10
+        }
   });
