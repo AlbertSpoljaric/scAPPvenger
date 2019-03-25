@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
 import BackButton from '../components/BackButton';
+import QrModal from '../components/QrModal'
 
 export default class CameraExample extends React.Component {
   constructor(props) {
@@ -70,6 +71,7 @@ export default class CameraExample extends React.Component {
   render() {
     let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
     let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
+    let qrModal = this.props.join ? null : <TouchableOpacity><QrModal></QrModal></TouchableOpacity>
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -151,6 +153,7 @@ export default class CameraExample extends React.Component {
               </TouchableOpacity>
             </View>
             {backBtn}
+            {qrModal}
           </Camera>
         </View>
       );
