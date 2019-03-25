@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert} from 'react-native';
+import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet} from 'react-native';
+import CodeGen from './CodeGen';
 
-class QrModal extends Component {
+export default class QrModal extends Component {
   state = {
     modalVisible: false,
   };
@@ -12,19 +13,18 @@ class QrModal extends Component {
 
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View>
         <Modal
           animationType="slide"
           transparent={false}
           visible={this.state.modalVisible}
-          onRequestClose={() => {
-            Alert.alert('Modal has been closed.');
-          }}>
-          <View style={{marginTop: 22}}>
+          >
+          <View style={styles.container}>
             <View>
-              <Text>Hello World!</Text>
+              <CodeGen bar = {this.props.data.groupId} qr ={this.props.data.groupId}></CodeGen>
 
               <TouchableHighlight
+                style= {styles.button}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
                 }}>
@@ -35,12 +35,30 @@ class QrModal extends Component {
         </Modal>
 
         <TouchableHighlight
-          onPress={() => {
-            this.setModalVisible(true);
-          }}>
+            style={styles.button}
+            onPress={() => {
+                this.setModalVisible(true);
+            }}>
           <Text>Show Modal</Text>
         </TouchableHighlight>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+    button: {
+      alignItems: 'center',
+      backgroundColor: '#c12cc1',
+      padding: 10,
+      margin: 10
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        height: 150,
+    }
+  });

@@ -15,6 +15,7 @@ export default class Game extends React.Component {
             current_clue: ['This is the first mock clue!', 'This is the second mock clue!', 'This is the third mock clue!', 'This is the fourth mock clue!', 'This is the fifth mock clue!'],
             game_order: this.data.gameorder,
             score: this.data.score,
+            groupId: this.data.groupId
         }
     }
     static navigationOptions = {

@@ -77,7 +77,7 @@ export default class CameraExample extends React.Component {
     // qr-code button if not join camera
     let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
     let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
-    let qrModal = this.props.join ? null : <TouchableOpacity><QrModal></QrModal></TouchableOpacity>
+    let qrModal = this.props.join ? null : <TouchableOpacity><QrModal data={this.props.data}></QrModal></TouchableOpacity>
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -89,7 +89,7 @@ export default class CameraExample extends React.Component {
           <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
-            style={{ flex: 1 }}
+            style={{ flex: 1}}
             type={this.state.type}
             ref={ref => {
               this.camera = ref;
@@ -120,7 +120,7 @@ export default class CameraExample extends React.Component {
               }}>
               <TouchableOpacity
                 style={{
-                  flex: 0.1,
+                  flex: 0.2,
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}
@@ -145,7 +145,7 @@ export default class CameraExample extends React.Component {
               }}>
               <TouchableOpacity
                 style={{
-                  flex: 0.1,
+                  flex: 0.2,
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}
@@ -158,8 +158,9 @@ export default class CameraExample extends React.Component {
                 </Text>
               </TouchableOpacity>
             </View>
-            {backBtn}
             {qrModal}
+            {backBtn}
+
           </Camera>
         </View>
       );
