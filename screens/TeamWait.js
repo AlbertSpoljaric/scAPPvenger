@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert 
 import { Image } from 'react-native-elements';
 import QRCode from 'react-native-qrcode';
 import Barcode from 'react-native-barcode-builder';
-
+import CodeGen from '../components/CodeGen';
 
 
 export default class TeamWait extends React.Component {
