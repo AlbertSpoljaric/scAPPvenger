@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
 import QRCode from 'react-native-qrcode';
 import Barcode from 'react-native-barcode-builder';
+import CodeGen from '../components/CodeGen';
 
 
 
@@ -29,13 +30,18 @@ export default class TeamJoin extends React.Component {
                 this.setState({ notEnoughPlayers: false })
             }
         }.bind(this))
+
+        this.socket.on('letsplay', function (data) {
+            this.props.navigation.navigate('Game', { socket: this.socket, data: this.data, groupSize: this.state.groupSize })
+        }.bind(this))
+
     }
     static navigationOptions = {
         header: null
     }
 
     teamReady = () => {
-        this.props.navigation.navigate('Game', { socket: this.socket, data: this.data, groupSize: this.state.groupSize })
+        this.socket.emit('groupready');
     }
 
 
@@ -51,6 +57,16 @@ export default class TeamJoin extends React.Component {
                     <Text>Group size: {this.state.groupSize}</Text>
                 </View>
 
+                <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
+
+
+                <Text style={styles.infoText}>Click OK when your group has scanned the QR-code.</Text>
+                {okBtn}
+            </View >
+        );
+    }
+}
+/*
                 <Barcode value={this.state.valueForBarCode} format="CODE128" />
                 <QRCode
                 value={this.state.valueForQRCode}
@@ -63,13 +79,7 @@ export default class TeamJoin extends React.Component {
             //Front Color of QRCode
 
             />
-                <Text style={styles.infoText}>Click OK when your group has scanned the QR-code.</Text>
-                {okBtn}
-            </View >
-        );
-    }
-}
-
+*/
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         height: 150,
     },
-    infoText:{
+    infoText: {
         margin: 20,
         padding: 10
     }

@@ -15,6 +15,11 @@ export default class CameraExample extends React.Component {
         Alert.alert(data.error)
       } else if (data.groupname) {
         props.teamWait(data); // changed
+        this.setState({
+          hasCameraPermission: null,
+          type: Camera.Constants.Type.back,
+          barcodeScanning: false,
+        })
       }
     }.bind(this))
 
@@ -69,6 +74,7 @@ export default class CameraExample extends React.Component {
 
 
   render() {
+    // qr-code button if not join camera
     let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
     let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
     let qrModal = this.props.join ? null : <TouchableOpacity><QrModal></QrModal></TouchableOpacity>

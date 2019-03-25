@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert 
 import { Image } from 'react-native-elements';
 import QRCode from 'react-native-qrcode';
 import Barcode from 'react-native-barcode-builder';
-
+import CodeGen from '../components/CodeGen';
 
 
 export default class TeamWait extends React.Component {
@@ -15,7 +15,9 @@ export default class TeamWait extends React.Component {
         this.socket = props.navigation.state.params.socket;
         this.data = props.navigation.state.params.data;
 
-
+        this.socket.on('letsplay', function (data) {
+            this.props.navigation.navigate('Game', { socket: this.socket, data: this.data })
+        }.bind(this))
 
         this.state = { // added QR and Bar
             valueForBarCode: "" + this.data.groupId,
@@ -37,8 +39,17 @@ export default class TeamWait extends React.Component {
         return (
             <View style={styles.container}>
                 <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
+                <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
+       
 
-                <Barcode value={this.state.valueForBarCode} format="CODE128" />
+                <Text>WAITING FOR TEAM... HOLD TIGHT!</Text>
+
+            </View>
+        );
+    }
+}
+/*
+         <Barcode value={this.state.valueForBarCode} format="CODE128" />
                 <QRCode
                     value={this.state.valueForQRCode}
                     //Setting the value of QRCode
@@ -49,24 +60,6 @@ export default class TeamWait extends React.Component {
                     fgColor="#fff"
                 //Front Color of QRCode
 
-                />
-
-                <Text>WAITING FOR TEAM... HOLD TIGHT!</Text>
-
-            </View>
-        );
-    }
-}
-/*
-<QRCode
-                    value={this.state.valueForQRCode}
-                    //Setting the value of QRCode
-                    size={300}
-                    //Size of QRCode
-                    bgColor="#F00"
-                    //Backgroun Color of QRCode
-                    fgColor="#000"
-                //Front Color of QRCode
                 />
 */
 const styles = StyleSheet.create({
