@@ -87,7 +87,7 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a' }}><Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }} numberOfLines={3}>{infoText}</Text>
+          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a', alignItems:'center', justifyContent:'center' }}><Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
             style={{ flex: 1}}

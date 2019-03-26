@@ -20,7 +20,7 @@ export default class CodeGen extends React.Component {
         return (
             <View style={styles.container}>
 
-                <Barcode value={this.state.valueForBarCode} format="CODE128" />
+                <Barcode value={this.state.valueForBarCode} format="CODE128" background="#ff9d0a"/>
                 <QRCode
                     value={this.state.valueForQRCode}
                     //Setting the value of QRCode
@@ -28,7 +28,7 @@ export default class CodeGen extends React.Component {
                     //Size of QRCode
                     bgColor="#000"
                     //Backgroun Color of QRCode
-                    fgColor="#fff"
+                    fgColor="#ff9d0a"
                 //Front Color of QRCode
                 />
             </View >
@@ -39,7 +39,7 @@ export default class CodeGen extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',

@@ -10,6 +10,7 @@ import StartApp from '../screens/StartApp';
 import TeamJoin from '../screens/TeamJoin';
 import TeamWait from '../screens/TeamWait';
 import Instructions from '../screens/Instructions';
+import ButtonGame from '../screens/ButtonGame';
 
 const MainNavigator = createStackNavigator({
     Main: { screen: StartApp},
@@ -20,7 +21,8 @@ const MainNavigator = createStackNavigator({
     Game: {screen:Game},
     TeamJoin: { screen: TeamJoin },
     TeamWait: { screen: TeamWait},
-    Instructions: {screen: Instructions}
+    Instructions: {screen: Instructions},
+    ButtonGame: {screen: ButtonGame}
 });
 
 const AppContainer = createAppContainer(MainNavigator);

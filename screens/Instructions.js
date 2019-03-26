@@ -25,12 +25,12 @@ export default class Instructions extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Game instructions:</Text>
-                <Text>  1.You will get a clue about QR-code location</Text>
-                <Text>  2. Find the right QR code and scan it</Text>
-                <Text>  3. You will get a new clue for a new QR code</Text>
-                <Text>  4. After you have successfully found 5 QR codes and scanned them, you win!</Text>
-                <Text>WAITING FOR ADMIN TO START THE GAME...</Text>
+                <Text style={styles.header}>Game instructions:</Text>
+                <Text style={styles.text}>  1.You will get a clue about QR-code location</Text>
+                <Text style={styles.text}>  2. Find the right QR code and scan it</Text>
+                <Text style={styles.text}>  3. You will get a new clue for a new QR code</Text>
+                <Text style={styles.text}>  4. After you have successfully found 5 QR codes and scanned them, you win!</Text>
+                <Text style={styles.text}>WAITING FOR ADMIN TO START THE GAME...</Text>
             </View>
         );
     }
@@ -39,10 +39,24 @@ export default class Instructions extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        height: 150
+        height: 150,
     },
+    text:{
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    header:{
+        fontSize: 30,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    wait:{
+        fontSize: 20,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    }
 });

@@ -20,6 +20,10 @@ export default class Game extends React.Component {
             this.setState({current_clue:data.nextClue})
         }.bind(this))
 
+        this.socket.on('colorgameinit', function(data){
+            this.props.navigation.navigate('ButtonGame', {socket: this.socket, data: data})
+        }.bind(this))
+
         this.state = {
             current_clue: this.data.nextClue,
             game_order: this.data.gameorder,
@@ -32,15 +36,11 @@ export default class Game extends React.Component {
     }
 
     changeScore = () => {
-        // if (this.state.score === 4) { // === games.length - 1 
-        //     this.socket.emit('cluecorrect');
-        //     this.props.navigation.navigate('EndScreen')
-        // } else {
-        //     this.setState({
-        //         score: (this.state.score + 1)
-        //     })
+        if (this.state.score === 3) { // === games.length - 1 
+            this.socket.emit('colorgameinit')
+         } else {
             this.socket.emit('cluecorrect')
-        // }
+        }
     }
     render() {
         return (

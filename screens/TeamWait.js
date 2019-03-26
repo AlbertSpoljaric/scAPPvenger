@@ -38,12 +38,15 @@ export default class TeamWait extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
-                <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
-       
-
-                <Text>WAITING FOR TEAM... HOLD TIGHT!</Text>
-
+                <View style={styles.infoText}>
+                    <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
+                </View>    
+                <View style={styles.code}>
+                    <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
+                </View>
+                <View>
+                    <Text>WAITING FOR TEAM... HOLD TIGHT!</Text>
+                </View>
             </View>
         );
     }
@@ -65,10 +68,17 @@ export default class TeamWait extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
-        height: 150
+        height: 150,
     },
+    infoText: {
+        textAlign: 'center',
+        alignItems: 'center'
+    },
+    code:{
+        flex: 0.5
+    }
 });

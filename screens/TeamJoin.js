@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     },
     infoText: {
         textAlign: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontWeight: 'bold'
     },
     code:{
         flex: 0.5

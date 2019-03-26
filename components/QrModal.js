@@ -11,6 +11,10 @@ export default class QrModal extends Component {
     this.setState({modalVisible: visible});
   }
 
+  handleCloseModal(){
+    this.setState({modalVisible:false})
+  }
+
   render() {
     return (
       <View>
@@ -30,7 +34,8 @@ export default class QrModal extends Component {
                 style= {styles.button}
                 onPress={() => {
                   this.setModalVisible(!this.state.modalVisible);
-                }}>
+                }}
+                onRequestClose={this.handleCloseModal}>
                 <Text>Return to Game</Text>
             </TouchableHighlight>
 
@@ -58,7 +63,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
