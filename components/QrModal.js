@@ -47,7 +47,7 @@ export default class QrModal extends Component {
             onPress={() => {
                 this.setModalVisible(true);
             }}>
-          <Text>Team QR Code</Text>
+          <Text style={{color:'#fff'}}>Team QR Code</Text>
         </TouchableHighlight>
       </View>
     );
@@ -57,7 +57,7 @@ export default class QrModal extends Component {
 const styles = StyleSheet.create({
     button: {
       alignItems: 'center',
-      backgroundColor: '#c12cc1',
+      backgroundColor: '#000000',
       padding: 10,
       margin: 10
     },
