@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Alert} from 'react-native';
 import CameraExample from '../components/CameraExample';
 
 
@@ -11,10 +11,24 @@ export default class Game extends React.Component {
         this.data = props.navigation.state.params.data;
         this.groupSize = props.navigation.state.params.groupSize;
 
+        this.socket.on('increasescore', function(data){
+            Alert.alert('Your team has found a correct QR code!');
+            this.setState({score:data.score})
+            if(data.score==5){
+                this.props.navigation.navigate('EndScreen');
+            }
+            this.setState({current_clue:data.nextClue})
+        }.bind(this))
+
+        this.socket.on('colorgameinit', function(data){
+            this.props.navigation.navigate('ButtonGame', {socket: this.socket, data: data})
+        }.bind(this))
+
         this.state = {
-            current_clue: ['This is the first mock clue!', 'This is the second mock clue!', 'This is the third mock clue!', 'This is the fourth mock clue!', 'This is the fifth mock clue!'],
+            current_clue: this.data.nextClue,
             game_order: this.data.gameorder,
             score: this.data.score,
+            groupId: this.data.groupId
         }
     }
     static navigationOptions = {
@@ -22,12 +36,10 @@ export default class Game extends React.Component {
     }
 
     changeScore = () => {
-        if (this.state.score === 4) { // === games.length - 1 
-            this.props.navigation.navigate('EndScreen')
-        } else {
-            this.setState({
-                score: (this.state.score + 1)
-            })
+        if (this.state.score === 0) { // === games.length - 1 
+            this.socket.emit('colorgameinit')
+         } else {
+            this.socket.emit('cluecorrect')
         }
     }
     render() {

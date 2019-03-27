@@ -6,13 +6,16 @@ import GameEnd from '../screens/GameEnd';
 import MainMenu from '../screens/MainMenu';
 import JoinGroup from '../screens/JoinGroup'
 import CreateGroup from '../screens/CreateGroup';
-import StartApp from '../screens/StartApp';
+import StartApp from '../screens/StartApp'; 
 import TeamJoin from '../screens/TeamJoin';
 import TeamWait from '../screens/TeamWait';
-import CatchTheRabbit from '../components/CatchTheRabbit'
+import CatchTheRabbit from '../screens/CatchTheRabbit'
+import Instructions from '../screens/Instructions';
+import ButtonGame from '../screens/ButtonGame';
+
 
 const MainNavigator = createStackNavigator({
-    Main: { screen: CatchTheRabbit},
+    Main: { screen: CatchTheRabbit}, // REMEMBER TO CHANGE TO: StartApp *********************************************************************
     MainMenu: {screen: MainMenu},
     EndScreen: {screen: GameEnd},
     Join: {screen: JoinGroup},
@@ -20,7 +23,10 @@ const MainNavigator = createStackNavigator({
     Game: {screen:Game},
     TeamJoin: { screen: TeamJoin },
     TeamWait: { screen: TeamWait},
-    CatchTheRabbit: {screen: CatchTheRabbit}
+    CatchTheRabbit: {screen: CatchTheRabbit},
+    Instructions: {screen: Instructions},
+    ButtonGame: {screen: ButtonGame}
+
 });
 
 const AppContainer = createAppContainer(MainNavigator);

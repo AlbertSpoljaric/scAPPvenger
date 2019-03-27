@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TouchableOpacity, Alert } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
 import BackButton from '../components/BackButton';
+import QrModal from '../components/QrModal'
 
 export default class CameraExample extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ export default class CameraExample extends React.Component {
     this.socket = props.socket; 
 
     this.socket.on('groupjoin', function (data) {
+      if(this.props.join){
       if (data.error) {
         Alert.alert(data.error)
       } else if (data.groupname) {
@@ -20,7 +22,7 @@ export default class CameraExample extends React.Component {
           barcodeScanning: false,
         })
       }
-    }.bind(this))
+    }}.bind(this))
 
     this.state = {
       hasCameraPermission: null,
@@ -49,7 +51,7 @@ export default class CameraExample extends React.Component {
     }
     else {
       if (code.data == this.props.data.game_order[this.props.data.score]) {
-        Alert.alert(`Congratulations! You have found the correct QR-code!`)
+        // Alert.alert(`Congratulations! You have found the correct QR-code!`)
         this.props.changeScore();
       } else {
         Alert.alert(`Wrong QR-code! Continue searching!`)
@@ -74,8 +76,9 @@ export default class CameraExample extends React.Component {
 
   render() {
     // qr-code button if not join camera
-    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue[this.props.data.score];
+    let infoText = this.props.join ? "Scan QR-code to join group!" : this.props.data.current_clue;
     let backBtn = this.props.join ? <BackButton goBack={this.props.goBack} /> : null;
+    let qrModal = this.props.join ? null : <TouchableOpacity><QrModal data={this.props.data}></QrModal></TouchableOpacity>
     const { hasCameraPermission } = this.state;
     if (hasCameraPermission === null) {
       return <View />;
@@ -84,10 +87,10 @@ export default class CameraExample extends React.Component {
     } else {
       return (
         <View style={{ flex: 1 }}>
-          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
+          <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a', alignItems:'center', justifyContent:'center' }}><Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }} numberOfLines={3}>{infoText}</Text>
           </View>
           <Camera
-            style={{ flex: 1 }}
+            style={{ flex: 1}}
             type={this.state.type}
             ref={ref => {
               this.camera = ref;
@@ -116,9 +119,9 @@ export default class CameraExample extends React.Component {
                 backgroundColor: 'transparent',
                 flexDirection: 'row',
               }}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 style={{
-                  flex: 0.1,
+                  flex: 0.2,
                   alignSelf: 'flex-end',
                   alignItems: 'center',
                 }}
@@ -133,7 +136,7 @@ export default class CameraExample extends React.Component {
                   style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
                   {' '}Flip{' '}
                 </Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
             <View
               style={{
@@ -143,20 +146,26 @@ export default class CameraExample extends React.Component {
               }}>
               <TouchableOpacity
                 style={{
-                  flex: 0.1,
-                  alignSelf: 'flex-end',
+                  // flex: 0.2,
+                  // alignSelf: 'flex-end',
                   alignItems: 'center',
+                  justifyContent: 'center',
+                  backgroundColor: '#6EC5B8',
+                  padding: 10,
+                  margin: 10
                 }}
                 onPress={() => {
                   this.setState({ barcodeScanning: true });
                 }}>
                 <Text
-                  style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
-                  {' '}SCAN{' '}
+                  style={{ fontSize: 18, color: 'white' }}>
+                  SCAN
                 </Text>
               </TouchableOpacity>
             </View>
+            {qrModal}
             {backBtn}
+
           </Camera>
         </View>
       );

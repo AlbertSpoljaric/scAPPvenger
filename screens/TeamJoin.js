@@ -1,7 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
-import QRCode from 'react-native-qrcode';
-import Barcode from 'react-native-barcode-builder';
+import { StyleSheet, Text, View, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import CodeGen from '../components/CodeGen';
 
 
@@ -32,7 +30,7 @@ export default class TeamJoin extends React.Component {
         }.bind(this))
 
         this.socket.on('letsplay', function (data) {
-            this.props.navigation.navigate('Game', { socket: this.socket, data: this.data, groupSize: this.state.groupSize })
+            this.props.navigation.navigate('Instructions', { socket: this.socket, data: this.data, groupSize: this.state.groupSize })
         }.bind(this))
 
     }
@@ -46,22 +44,23 @@ export default class TeamJoin extends React.Component {
 
 
     render() {
-        let okBtn = this.state.notEnoughPlayers === true ? <TouchableOpacity disabled={true} onPress={this.teamReady} title="Team Ready" ><Text>Waiting for team members!</Text></TouchableOpacity> : <TouchableOpacity onPress={this.teamReady} title="Team Ready" ><Text>OK, ready for the game!</Text></TouchableOpacity>;
+        let okBtn = this.state.notEnoughPlayers === true ? <TouchableOpacity style={styles.notReadyButton} disabled={true} onPress={this.teamReady} title="Team Ready" ><Text>Waiting for team members!</Text></TouchableOpacity> : <TouchableOpacity style={styles.button} onPress={this.teamReady} title="Team Ready" ><Text>OK, ready for the game!</Text></TouchableOpacity>;
 
         return (
             <View style={styles.container}>
 
-                <View style={styles.infoText}>
+                <View style= {styles.infoText} >
                     <Text>SHOW THIS TO YOUR TEAM TO JOIN YOUR GROUP!</Text>
                     <Text>You need at least 3 people in your team:</Text>
                     <Text>Group size: {this.state.groupSize}</Text>
                 </View>
-
-                <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
-
-
-                <Text style={styles.infoText}>Click OK when your group has scanned the QR-code.</Text>
-                {okBtn}
+                <View style={styles.code}>
+                    <CodeGen qr={this.state.valueForQRCode} bar={this.state.valueForBarCode} />
+                </View>
+                <View style={styles.infoText}>
+                    <Text >Click OK when your group has scanned the QR-code.</Text>
+                    {okBtn}
+                </View>
             </View >
         );
     }
@@ -83,14 +82,30 @@ export default class TeamJoin extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#ff9d0a',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',
         height: 150,
     },
     infoText: {
-        margin: 20,
-        padding: 10
-    }
+        textAlign: 'center',
+        alignItems: 'center',
+        fontWeight: 'bold'
+    },
+    code:{
+        flex: 0.5
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#53e028',
+        padding: 10,
+        margin: 10
+      },
+    notReadyButton: {
+        alignItems: 'center',
+        backgroundColor: '#e00606',
+        padding: 10,
+        margin: 10
+      }
 });
