@@ -11,41 +11,48 @@ export default class ButtonGame extends React.Component {
         this.data = props.navigation.state.params.data;
         this.groupSize = props.navigation.state.params.groupSize;
 
-        this.socket.on('colorgame', function(data){
-            if(data.score===0){
-                this.setState({start:true})
-            } else{
-                this.setState({
-                    score:data.score,
-                    clue:data.clue,
-                    btnColor: data.color
-                })
-                if(data.score==20){
-                    Alert.alert('Who-hoo, you won the game!!!');
-                    this.props.navigation.navigate('EndScreen');
-                }
-                this.setState({
+        this.socket.on('colorgamestart', function(){
+            this.setState({
+                start: true
+            })
+        }.bind(this))
 
-                })
+        this.socket.on('colorgame', function(data){
+            clearTimeout(this.timeout);
+            this.setState({
+                score:data.score,
+                clue:data.clue,
+                btnColor: data.color,
+                timeLimit: data.timelimit,
+                time: 0
+            })
+            if(data.score==20){
+                Alert.alert('Who-hoo, you won the game!!!');
+                this.props.navigation.navigate('EndScreen');
             }
+            this.startTimer();
         }.bind(this))
 
         this.socket.on('colorgameinit', function(data){
-            
-            clearTimeout(this.startTimer);
-            Alert.alert("Oh no, your group pushed a wrong button! But you can try again..");
-            this.data = data;
-            this.restartGame();
+            clearTimeout(this.timeout);
+            Alert.alert("Oh no, time ran out or you pushed a wrong button! But you can try again..");
+            this.setState({
+                score: 0,
+                btnColor: data.color,
+                clue: data.clue,
+                time: 0,
+                start: false
+            })
         }.bind(this))
 
         
 
         this.state = {
             score: 0,
-            btnColor: [],
-            clue: '',
+            btnColor: this.data.color,
+            clue: this.data.clue,
             time: 0,
-            timeLimit: 100,
+            timeLimit: 0,
             start: false
         }
     }
@@ -63,37 +70,27 @@ You have to click buttons in a correct order to finish the game. Once you push t
         this.socket.emit('colorgame');
     }
 
-    // startTimer = () =>{
-    //     if(this.state.time==100){
-    //         clearTimeout(this.startTimer);
-    //         Alert.alert("Oh no, the time ran out! Start the game again!");
-    //         this.restartGame();
-    //     } else{
-    //         this.setState({time: (this.state.time+1)})
-    //         setTimeout(this.startTimer, this.state.timeLimit);
-    //     }   
-    // }
+    startTimer = () =>{
+        if(this.state.time==100 && this.state.score < 20){
+            clearTimeout(this.timeout);
+            // Alert.alert("Oh no, the time ran out! Start the game again!");
+            this.socket.emit('colorgameinit');
+        } else{
+            this.setState({time: (this.state.time+10)})
+            this.timeout=setTimeout(this.startTimer, (this.state.timeLimit/10));
+        }   
+    }
+
+
 
     startGame = () =>{
-        this.setState({
-            start: true,
-            clue: this.data.clue,
-            btnColor: this.data.color
-        });
-        this.socket.emit('colorgame');
-        // this.startTimer();
+        // this.setState({
+        //     start: true,
+        //     // clue: this.data.clue,
+        //     // btnColor: this.data.color
+        // });
+        this.socket.emit('colorgamestart');
     }
-
-    restartGame = () =>{
-        this.setState({
-            score: 0,
-            btnColor: '',
-            clue: [],
-            time: 0,
-            start: false
-        })
-    }
-
 
 
     render() {
@@ -139,7 +136,6 @@ You have to click buttons in a correct order to finish the game. Once you push t
                             shadowColor="#999"
                             bgColor="#fff"
                         >
-                          
                         </ProgressCircle>
                     </View>
                     {btn}

@@ -36,7 +36,7 @@ export default class Game extends React.Component {
     }
 
     changeScore = () => {
-        if (this.state.score === 3) { // === games.length - 1 
+        if (this.state.score === 0) { // === games.length - 1 
             this.socket.emit('colorgameinit')
          } else {
             this.socket.emit('cluecorrect')
