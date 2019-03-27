@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, Alert } from 'react-native';
 import { Camera, Permissions, BarCodeScanner } from 'expo';
 import BackButton from '../components/BackButton';
 
@@ -7,13 +7,13 @@ export default class CameraExample extends React.Component {
   constructor(props) {
     super(props)
 
-    this.socket = props.socket; // changed
+    this.socket = props.socket; 
 
     this.socket.on('groupjoin', function (data) {
       if (data.error) {
         Alert.alert(data.error)
       } else if (data.groupname) {
-        props.teamWait(data); // changed
+        props.teamWait(data); 
         this.setState({
           hasCameraPermission: null,
           type: Camera.Constants.Type.back,

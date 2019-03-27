@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import AppNavigator from './navigation/MainNavigator';

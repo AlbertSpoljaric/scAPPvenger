@@ -1,10 +1,10 @@
 {
-  "expoServerPort": null,
+  "expoServerPort": 19000,
   "webpackServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerNgrokUrl": "https://aj-uma.spolal.scappvenger.exp.direct",
+  "packagerNgrokUrl": "https://packager.aj-uma.spolal.scappvenger.exp.direct",
+  "ngrokPid": 201152,
   "devToolsPort": 19002,
-  "packagerPort": null,
-  "packagerPid": null
+  "packagerPort": 19001,
+  "packagerPid": 200288
 }

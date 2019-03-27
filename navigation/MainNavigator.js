@@ -9,21 +9,25 @@ import CreateGroup from '../screens/CreateGroup';
 import StartApp from '../screens/StartApp';
 import TeamJoin from '../screens/TeamJoin';
 import TeamWait from '../screens/TeamWait';
+import CatchTheRabbit from '../components/CatchTheRabbit'
+
+
 
 const MainNavigator = createStackNavigator({
-    Main: { screen: StartApp},
+    Main: { screen: CatchTheRabbit},
     MainMenu: {screen: MainMenu},
     EndScreen: {screen: GameEnd},
     Join: {screen: JoinGroup},
     Create: {screen: CreateGroup},
     Game: {screen:Game},
     TeamJoin: { screen: TeamJoin },
-    TeamWait: { screen: TeamWait}
+    TeamWait: { screen: TeamWait},
+    CatchTheRabbit: {screen: CatchTheRabbit}
 });
 
 const AppContainer = createAppContainer(MainNavigator);
 
-// Now AppContainer is the main component for React to render
+// Now AppContainer is thne main component for React to render
 
 export default class AppNavigator extends React.Component {
     render() {
