@@ -15,7 +15,7 @@ import ButtonGame from '../screens/ButtonGame';
 
 
 const MainNavigator = createStackNavigator({
-    Main: { screen: CatchTheRabbit}, // REMEMBER TO CHANGE TO: StartApp *********************************************************************
+    Main: { screen: StartApp}, 
     MainMenu: {screen: MainMenu},
     EndScreen: {screen: GameEnd},
     Join: {screen: JoinGroup},

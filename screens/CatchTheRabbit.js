@@ -8,6 +8,28 @@ import { FaceDetector, Camera, Permissions, BarCodeScanner } from 'expo';
 export default class CatchTheRabbit extends React.Component {
     constructor(props) {
         super(props)
+
+        this.socket = props.navigation.state.params.socket;
+        this.data = props.navigation.state.params.data;
+
+        this.socket.on('increasescore', function(data){
+            this.props.navigation.navigate('Game', {socket: this.socket, data: data})
+        }.bind(this))
+
+        this.socket.on('rabbitgame', function (data) {
+            if (data.error) {
+                Alert.alert(data.error)
+            } else if (data.users) {
+                Alert.alert("Your team catched a rabbit!!")
+                if (data.users == data.rabbits) {
+                    Alert.alert("Your team has found all the rabbits! Congratulations!")
+                    this.socket.emit('cluecorrect')
+                }
+                this.setState({
+                    rabbits: data.rabbits
+                })
+            }
+        }.bind(this))
         /*
 
         REPLACE THE BELOW CODE WITH A NEW this.socket.on('') function, to redirect the players when game ends.
@@ -36,7 +58,9 @@ export default class CatchTheRabbit extends React.Component {
             x: 0,
             y: 0,
             opacity: 0,
-            faceDetecting: true
+            faceDetecting: true,
+            users: this.data.users,
+            rabbits: 0
         };
     }
     static navigationOptions = {
@@ -84,7 +108,7 @@ export default class CatchTheRabbit extends React.Component {
 
     render() {
         // qr-code button if not join camera
-        let infoText = "Catch the Rabbit!";
+        let infoText = "Catch the Rabbit! Tip: Point the camera around :) Rabbits caught: " + this.state.rabbits + '/' + this.state.users;
         const { hasCameraPermission } = this.state;
         if (hasCameraPermission === null) {
             return <View />;
@@ -145,7 +169,7 @@ export default class CatchTheRabbit extends React.Component {
                                 }}
                                 onPress={() => {
                                     if (this.state.opacity === 1) {
-                                        Alert.alert("You catched the rabbit!!")
+                                        this.socket.emit('rabbitgame');
                                     }
 
                                     //this.setState({ barcodeScanning: true });

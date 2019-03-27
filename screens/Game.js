@@ -24,6 +24,10 @@ export default class Game extends React.Component {
             this.props.navigation.navigate('ButtonGame', {socket: this.socket, data: data})
         }.bind(this))
 
+        this.socket.on('rabbitgamestart', function(data){
+            this.props.navigation.navigate('CatchTheRabbit', {socket: this.socket, data: data})
+        }.bind(this))
+
         this.state = {
             current_clue: this.data.nextClue,
             game_order: this.data.gameorder,
@@ -37,7 +41,9 @@ export default class Game extends React.Component {
 
     changeScore = () => {
         if (this.state.score === 0) { // === games.length - 1 
-            this.socket.emit('colorgameinit')
+            //this.socket.emit('colorgameinit')
+            this.socket.emit('rabbitgamestart')
+            
          } else {
             this.socket.emit('cluecorrect')
         }

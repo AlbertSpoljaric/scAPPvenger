@@ -52,7 +52,13 @@ export default class CameraExample extends React.Component {
     else {
       if (code.data == this.props.data.game_order[this.props.data.score]) {
         // Alert.alert(`Congratulations! You have found the correct QR-code!`)
+        this.setState({
+          hasCameraPermission: null,
+          type: Camera.Constants.Type.back,
+          barcodeScanning: false,
+        })
         this.props.changeScore();
+        
       } else {
         Alert.alert(`Wrong QR-code! Continue searching!`)
       }

@@ -17,6 +17,8 @@ export default class ButtonGame extends React.Component {
             })
         }.bind(this))
 
+        
+
         this.socket.on('colorgame', function(data){
             clearTimeout(this.timeout);
             this.setState({
