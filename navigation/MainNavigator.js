@@ -11,8 +11,6 @@ import TeamJoin from '../screens/TeamJoin';
 import TeamWait from '../screens/TeamWait';
 import CatchTheRabbit from '../components/CatchTheRabbit'
 
-
-
 const MainNavigator = createStackNavigator({
     Main: { screen: CatchTheRabbit},
     MainMenu: {screen: MainMenu},

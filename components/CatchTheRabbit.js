@@ -39,7 +39,9 @@ export default class CatchTheRabbit extends React.Component {
             faceDetecting: true
         };
     }
-
+    static navigationOptions = {
+        header: null
+    }
 
     async componentWillMount() {
         const { status } = await Permissions.askAsync(Permissions.CAMERA);
@@ -154,7 +156,6 @@ export default class CatchTheRabbit extends React.Component {
                                 </Text>
                             </TouchableOpacity>
                         </View>
-
                         <Image
                             style={{
                                 opacity: this.state.opacity,
