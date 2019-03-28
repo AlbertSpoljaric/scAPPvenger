@@ -37,7 +37,7 @@ export default class ButtonGame extends React.Component {
 
         this.socket.on('colorgameinit', function(data){
             clearTimeout(this.timeout);
-            Alert.alert("Oh no, time ran out or you pushed a wrong button! But you can try again..");
+            Alert.alert("Oh no!", "Time ran out or you pushed a wrong button! But you can try again!");
             this.setState({
                 score: 0,
                 btnColor: data.color,
@@ -63,9 +63,7 @@ export default class ButtonGame extends React.Component {
     }
 
     async componentWillMount() {
-        Alert.alert(`Oh no, there is an obstacle in your way! 
-
-You have to click buttons in a correct order to finish the game. Once you push the start button, the game will start!`)
+        Alert.alert("Oh no!","There is an obstacle in your way! You have to click buttons in a correct order to finish the game. Once you push the start button, the game will start!")
         }
 
     submitColor = () => {
