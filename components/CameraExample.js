@@ -97,7 +97,7 @@ export default class CameraExample extends React.Component {
       return <View />;
     } else if (hasCameraPermission === false) {
       return <Text>No access to camera</Text>;
-    } else {
+    } else if (this.props.isFocused) {
       return (
         <View style={{ flex: 1 }}>
           <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a', alignItems:'center', justifyContent:'center' }}><Text style={{ color: 'black', fontSize: 20, fontWeight: 'bold' }} numberOfLines={3}>{infoText}</Text>
@@ -182,6 +182,8 @@ export default class CameraExample extends React.Component {
           </Camera>
         </View>
       );
+    } else {
+      return <View />;
     }
   }
 }

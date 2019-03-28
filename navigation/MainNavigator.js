@@ -9,9 +9,9 @@ import CreateGroup from '../screens/CreateGroup';
 import StartApp from '../screens/StartApp'; 
 import TeamJoin from '../screens/TeamJoin';
 import TeamWait from '../screens/TeamWait';
-import CatchTheRabbit from '../screens/CatchTheRabbit'
 import Instructions from '../screens/Instructions';
 import ButtonGame from '../screens/ButtonGame';
+import RabbitGame from '../screens/RabbitGame';
 
 
 const MainNavigator = createStackNavigator({
@@ -23,9 +23,9 @@ const MainNavigator = createStackNavigator({
     Game: {screen:Game},
     TeamJoin: { screen: TeamJoin },
     TeamWait: { screen: TeamWait},
-    CatchTheRabbit: {screen: CatchTheRabbit},
     Instructions: {screen: Instructions},
-    ButtonGame: {screen: ButtonGame}
+    ButtonGame: {screen: ButtonGame},
+    RabbitGame: {screen: RabbitGame}
 
 });
 

@@ -7,13 +7,14 @@ export default class CatchTheRabbit extends React.Component {
     constructor(props) {
         super(props)
 
-        this.socket = props.navigation.state.params.socket;
-        this.data = props.navigation.state.params.data;
+        this.socket = this.props.socket;
+        this.data = this.props.data;
 
         this.socket.on('increasescore', function(data) {
                 
                 Alert.alert("Your team has found all the rabbits! Congratulations!")
-                this.props.navigation.navigate('Game', {socket: this.socket, data: data})
+                this.props.nav(data);
+                //this.props.navigation.navigate('Game', {socket: this.socket, data: data})
                 
         }.bind(this))
 
