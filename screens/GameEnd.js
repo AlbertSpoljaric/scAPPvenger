@@ -11,7 +11,7 @@ export default class GameEnd extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.info}>CONGRATULATIONS! YOU HAVE WON THE GAME!</Text>
-                <Image source={require('../assets/testicon.png')}></Image>
+                <Image style={{width:200, height: 200, marginTop: 50}} source={require('../assets/testicon.png')}></Image>
             </View>
         );
     }
