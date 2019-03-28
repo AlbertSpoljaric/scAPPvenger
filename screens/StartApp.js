@@ -6,7 +6,7 @@ export default class StartApp extends React.Component {
     constructor(props) {
         super(props)
 
-        this.socket = io('https://loppuprojekti.herokuapp.com/');
+        this.socket = io('https://loppuprojekti.herokuapp.com/', {transports: ['websocket']});
 
         this.socket.on('uservalidation', function (data) {
             if (data.error) {

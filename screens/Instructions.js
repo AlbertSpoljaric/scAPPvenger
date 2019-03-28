@@ -29,7 +29,7 @@ export default class Instructions extends React.Component {
                 <Text style={styles.text}>  1.You will get a clue about QR-code location</Text>
                 <Text style={styles.text}>  2. Find the right QR code and scan it</Text>
                 <Text style={styles.text}>  3. You will get a new clue for a new QR code</Text>
-                <Text style={styles.text}>  4. After you have successfully found 5 QR codes and scanned them, you win!</Text>
+                <Text style={styles.text}>  4. After you have successfully found 2 QR codes and scanned them, and completed some games, you win!</Text>
                 <Text style={styles.text}>WAITING FOR ADMIN TO START THE GAME...</Text>
             </View>
         );
@@ -46,10 +46,12 @@ const styles = StyleSheet.create({
         height: 150,
     },
     text:{
+        margin: 10,
         fontSize: 20,
         textAlign: 'center'
     },
     header:{
+        margin: 10,
         fontSize: 30,
         textAlign: 'center',
         fontWeight: 'bold'

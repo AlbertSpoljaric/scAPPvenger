@@ -94,6 +94,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     code:{
+        margin: 20,
         flex: 0.5
     },
     button: {

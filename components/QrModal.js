@@ -36,7 +36,7 @@ export default class QrModal extends Component {
                   this.setModalVisible(!this.state.modalVisible);
                 }}
                 onRequestClose={this.handleCloseModal}>
-                <Text>Return to Game</Text>
+                <Text style={{color:'#fff'}}>Return to Game</Text>
             </TouchableHighlight>
 
           </View>
