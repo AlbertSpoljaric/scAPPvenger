@@ -161,11 +161,15 @@ export default class CatchTheRabbit extends React.Component {
                                 flexDirection: 'row',
                             }}>
                             <TouchableOpacity
-                                style={{
-                                    flex: 0.1,
-                                    alignSelf: 'flex-end',
+                                   style={{
+                                    // flex: 0.2,
+                                    // alignSelf: 'flex-end',
                                     alignItems: 'center',
-                                }}
+                                    justifyContent: 'center',
+                                    backgroundColor: '#6EC5B8',
+                                    padding: 10,
+                                    margin: 10
+                                  }}
                                 onPress={() => {
                                     if (this.state.opacity === 1) {
                                         this.socket.emit('rabbitgame');
@@ -174,7 +178,7 @@ export default class CatchTheRabbit extends React.Component {
                                     //this.setState({ barcodeScanning: true });
                                 }}>
                                 <Text
-                                    style={{ fontSize: 18, marginBottom: 10, color: 'white' }}>
+                                   style={{ fontSize: 18, color: 'white' }}>
                                     {' '}CATCH!{' '}
                                 </Text>
                             </TouchableOpacity>

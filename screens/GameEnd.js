@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Dimensions, Image } from 'react-native';
 
 export default class GameEnd extends React.Component {
     static navigationOptions = {
@@ -10,7 +10,8 @@ export default class GameEnd extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text style={styles.info}>CONGRATULATIONS! YOU HAVE WON THE GAME! FIND THE GAME ADMINS!</Text>
+                <Text style={styles.info}>CONGRATULATIONS! YOU HAVE WON THE GAME!</Text>
+                <Image source={require('../assets/testicon.png')}></Image>
             </View>
         );
     }
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
         height: 150,
     },
     info:{
-        textAlign: 'center'
+        textAlign: 'center',
+        fontWeight: 'bold'
     }
 });
