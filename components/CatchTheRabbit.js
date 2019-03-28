@@ -116,7 +116,7 @@ export default class CatchTheRabbit extends React.Component {
         } else {
             return (
                 <View style={{ flex: 1 }}>
-                    <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#FFDE99' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
+                    <View style={{ height: 150, paddingTop: 50, paddingLeft: 20, paddingRight: 20, paddingBottom: 20, backgroundColor: '#ff9d0a' }}><Text style={{ color: 'black', fontSize: 20 }} numberOfLines={3}>{infoText}</Text>
                     </View>
                     <Camera
                         style={{ flex: 1 }}

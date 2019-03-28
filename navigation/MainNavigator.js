@@ -15,7 +15,7 @@ import RabbitGame from '../screens/RabbitGame';
 
 
 const MainNavigator = createStackNavigator({
-    Main: { screen: GameEnd}, 
+    Main: { screen: StartApp}, 
     MainMenu: {screen: MainMenu},
     EndScreen: {screen: GameEnd},
     Join: {screen: JoinGroup},
