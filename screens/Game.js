@@ -6,7 +6,7 @@ import CameraExample from '../components/CameraExample';
 export default class Game extends React.Component {
     constructor(props) {
         super(props)
-
+        
         this.socket = props.navigation.state.params.socket;
         this.data = props.navigation.state.params.data;
         this.groupSize = props.navigation.state.params.groupSize;
@@ -43,10 +43,11 @@ export default class Game extends React.Component {
         if (this.state.score === 0) { // === games.length - 1 
             this.socket.emit('rabbitgamestart') //Rabbit game here
          }
-         else if(this.state.score ===1){
+         else if(this.state.score === 1){
             this.socket.emit('colorgameinit')
          } else {
-            this.socket.emit('cluecorrect')
+            Alert.alert('ERROR: Score was not 0 or 1... No games initialized.')
+            //this.socket.emit('cluecorrect')
         }
     }
     render() {

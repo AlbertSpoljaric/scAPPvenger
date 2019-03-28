@@ -10,6 +10,14 @@ export default class CameraExample extends React.Component {
 
     this.socket = props.socket; 
 
+    /*this.socket.on('testsocket', function(data) {
+      this.setState({
+        hasCameraPermission: null,
+        type: Camera.Constants.Type.back,
+        barcodeScanning: false,
+      })
+    }.bind(this))
+    */
     this.socket.on('groupjoin', function (data) {
       if(this.props.join){
       if (data.error) {
@@ -32,6 +40,7 @@ export default class CameraExample extends React.Component {
   }
 
 
+
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === 'granted' });
@@ -52,13 +61,11 @@ export default class CameraExample extends React.Component {
     else {
       if (code.data == this.props.data.game_order[this.props.data.score]) {
         // Alert.alert(`Congratulations! You have found the correct QR-code!`)
-        this.setState({
-          hasCameraPermission: null,
-          type: Camera.Constants.Type.back,
-          barcodeScanning: false,
-        })
-        this.props.changeScore();
         
+        // if score == something 
+        // do emit, else only changescore
+        //this.socket.emit('testsocket')  
+        this.props.changeScore();      
       } else {
         Alert.alert(`Wrong QR-code! Continue searching!`)
       }

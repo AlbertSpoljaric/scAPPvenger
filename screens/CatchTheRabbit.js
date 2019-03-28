@@ -3,8 +3,6 @@ import { Text, View, TouchableOpacity, Alert, Dimensions, Image } from 'react-na
 import { FaceDetector, Camera, Permissions, BarCodeScanner } from 'expo';
 
 
-//import { RNCamera } from 'react-native-camera';
-
 export default class CatchTheRabbit extends React.Component {
     constructor(props) {
         super(props)
@@ -12,8 +10,11 @@ export default class CatchTheRabbit extends React.Component {
         this.socket = props.navigation.state.params.socket;
         this.data = props.navigation.state.params.data;
 
-        this.socket.on('increasescore', function(data){
-            this.props.navigation.navigate('Game', {socket: this.socket, data: data})
+        this.socket.on('increasescore', function(data) {
+                
+                Alert.alert("Your team has found all the rabbits! Congratulations!")
+                this.props.navigation.navigate('Game', {socket: this.socket, data: data})
+                
         }.bind(this))
 
         this.socket.on('rabbitgame', function (data) {
@@ -21,10 +22,7 @@ export default class CatchTheRabbit extends React.Component {
                 Alert.alert(data.error)
             } else if (data.users) {
                 Alert.alert("Your team catched a rabbit!!")
-                if (data.users == data.rabbits) {
-                    Alert.alert("Your team has found all the rabbits! Congratulations!")
-                    this.socket.emit('cluecorrect')
-                }
+               
                 this.setState({
                     rabbits: data.rabbits
                 })

@@ -7,11 +7,11 @@ export default class QrModal extends Component {
     modalVisible: false,
   };
 
-  setModalVisible(visible) {
+  setModalVisible=(visible)=> {
     this.setState({modalVisible: visible});
   }
 
-  handleCloseModal(){
+  handleCloseModal=()=>{
     this.setState({modalVisible:false})
   }
 
